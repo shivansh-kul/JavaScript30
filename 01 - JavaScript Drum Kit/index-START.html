@@ -82,6 +82,7 @@ for(let i=0;i<length;i++){
       console.log(audio)
       for(let i=0;i<audioLength;i++){
         if(audio[i].attributes["data-key"].value===data_key){
+          audio[i].currentTime = 0
           audio[i].play();
         }
       }
