@@ -96,6 +96,41 @@
   </div>
 
 <script>
+  let item = document.getElementsByTagName("input");
+  item = Array.from(item);
+  let last = item.length-1;
+  item.forEach(element => {
+    element.addEventListener("click",e=>{
+      last = item.indexOf(e.target);
+      // console.log(element.checked);
+      // console.log(index);
+    })
+  });
+
+  document.addEventListener("keydown",e=>{
+    // console.log(e);
+    if(e.key==="Shift"){
+      // console.log("helllo")
+        // console.log("helllo")
+        let start = last;
+        // console.log(start);
+        item.forEach(element => {
+          element.addEventListener("click",e=>{
+            let end = item.indexOf(e.target);
+            if(start>end){
+              let t = start;
+              start = end;
+              end = t;
+            }
+            // console.log(start);
+            // console.log(end);
+            for(let i=start;i<=end;i++){
+              item[i].checked = true;
+            }
+          })
+        });
+    }
+  })
 </script>
 </body>
 </html>
