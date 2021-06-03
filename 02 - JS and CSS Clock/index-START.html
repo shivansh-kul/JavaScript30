@@ -62,13 +62,42 @@
       background: black;
       position: absolute;
       top: 50%;
+      transform-origin: right;
+      transition: all 0.05s;
+      transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
     }
-
+    .hour-hand{
+      width:38% ;
+      left:12%
+    }
+    .second-hand{
+      top:50%;
+      height:3px;
+    }
   </style>
 
   <script>
+    let hourHand = document.getElementsByClassName("hour-hand")[0];
+    let minHand = document.getElementsByClassName("min-hand")[0];
+    let secondHand = document.getElementsByClassName("second-hand")[0];
+    
+    function clock(){
+      let time = new Date();
+      let hour = time.getHours()%12;
+      let min = time.getMinutes();
+      let sec = time.getSeconds();
+      
+      let hourDeg = (hour-9)*30 + (min)*(0.5);
+      let minDeg = (min-45)*6 + (sec)*(1/10);
+      let secondDeg = (sec-45)*6;
 
-
+      hourHand.style.cssText = `transform:rotate(${hourDeg}deg)`
+      minHand.style.cssText = `transform:rotate(${minDeg}deg)`
+      secondHand.style.cssText = `transform:rotate(${secondDeg}deg)`
+    }
+    document.addEventListener("DOMContentLoaded",()=>setInterval(clock,1000),false);
+    //setInterval(clock,1000)
+    setDate();
   </script>
 </body>
 </html>
